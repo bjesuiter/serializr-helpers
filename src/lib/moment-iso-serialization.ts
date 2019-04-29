@@ -20,7 +20,8 @@ export const MomentIsoSerialization: PropSchema =
         //value.toJson would normalize the output to utc,
         // which would make it impossible to reconstruct the original timezone
 
-        if (value === undefined || value == null) {
+        // intended use of == vs. === to include null when checking for undefined
+        if (value == undefined) {
             // logger.debug('Moment object will be skipped in serialization - object is undefined');
             return SKIP;
         }

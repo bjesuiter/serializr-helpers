@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc && tsc -p tsconfig.browser.json",
+    "lint": "wotan -p tsconfig.json",
+    "lint:fix": "wotan -p tsconfig.json --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublishOnly": "npm run build"
   },
@@ -33,6 +35,8 @@
   },
   "homepage": "https://github.com/bjesuiter/serializr-helpers#readme",
   "devDependencies": {
+    "@fimbul/mithotyn": "^0.18.0",
+    "@fimbul/wotan": "^0.20.0",
     "typescript": "^3.4.5"
   },
   "dependencies": {
