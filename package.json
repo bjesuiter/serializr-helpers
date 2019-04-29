@@ -4,6 +4,7 @@
   "description": "Provides some helper functions and serialization PropertySchemas for mobxjs/serializr - library",
   "main": "index.js",
   "scripts": {
+    "build": "tsc && tsc -p tsconfig.browser.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -12,7 +13,9 @@
   },
   "files": [
     "README.md",
-    "package.json"
+    "package.json",
+    "dist",
+    "dist.browser"
   ],
   "keywords": [
     "serializr",
