@@ -3,9 +3,8 @@
  * to make moment.js Moment objects serializable
  * @type {PropSchema}
  */
-import {custom, PropSchema, SKIP} from "serializr";
-import {Moment} from "moment";
-import moment = require("moment");
+import {custom, PropSchema, SKIP} from 'serializr';
+import moment, {Moment} from 'moment';
 
 /**
  * TODO: Add customization to this schema
@@ -27,6 +26,6 @@ export const MomentIsoSerialization: PropSchema =
         }
 
         return value.toISOString();
-    }, (jsonValue) => {
+    }, (jsonValue: string) => {
         return moment(jsonValue);
     });
