@@ -11,3 +11,9 @@ Can be used as a serializr PropSchema to serialize Moment Objects.
      */
     @serializable(MomentSerializationSchema)
     timestamp: Moment;
+    
+## TODOs 
+
+- add typescript 
+- add jest testing
+- add tests which serialize demo objects  
