@@ -3,7 +3,7 @@ Provides some helper functions and serialization PropertySchemas for mobxjs/seri
 
 ## Content 
 
-### Class MomentObject Usage
+### Class `MomentIsoSerialization` Usage
 Can be used as a serializr PropSchema to serialize Moment Objects. 
 
     /**
