@@ -1,5 +1,5 @@
 /**
- * This serializr PropertySchema can be used with @serializable(object(MomentSerializationSchema))
+ * This serializr PropertySchema can be used with @serializable(MomentSerializationSchema)
  * to make moment.js Moment objects serializable
  * @type {PropSchema}
  */
