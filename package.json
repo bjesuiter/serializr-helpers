@@ -1,0 +1,27 @@
+{
+  "name": "@bjesuiter/serializr-helpers",
+  "version": "0.0.1",
+  "description": "Provides some helper functions and serialization PropertySchemas for mobxjs/serializr - library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bjesuiter/serializr-helpers.git"
+  },
+  "keywords": [
+    "serializr",
+    "typescript-serializer",
+    "object-serializer",
+    "serializer-helpers",
+    "serialize-helpers",
+    "serializr-helpers"
+  ],
+  "author": "Benjamin Jesuiter <bjesuiter@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/bjesuiter/serializr-helpers/issues"
+  },
+  "homepage": "https://github.com/bjesuiter/serializr-helpers#readme"
+}
