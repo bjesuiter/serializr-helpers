@@ -11,7 +11,8 @@
     "url": "git+https://github.com/bjesuiter/serializr-helpers.git"
   },
   "files": [
-
+    "README.md",
+    "package.json"
   ],
   "keywords": [
     "serializr",
@@ -26,5 +27,8 @@
   "bugs": {
     "url": "https://github.com/bjesuiter/serializr-helpers/issues"
   },
-  "homepage": "https://github.com/bjesuiter/serializr-helpers#readme"
+  "homepage": "https://github.com/bjesuiter/serializr-helpers#readme",
+  "devDependencies": {
+    "typescript": "^3.4.5"
+  }
 }
