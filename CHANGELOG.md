@@ -7,5 +7,10 @@
 
 ## Versions
 
+## Next 
+
+- Feature: Serialization Helpers for JSON and POJOS
+- Feature: MomentIsoSerialization PropSchema
+
 ### [0.0.1] - 2019-04-29
 Initial Version
