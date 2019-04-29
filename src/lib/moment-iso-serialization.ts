@@ -15,7 +15,7 @@ import moment, {Moment} from 'moment';
  *      - how to handle utc and local time
  */
 export const MomentIsoSerialization: PropSchema =
-    custom((value: Moment) => {
+    custom((value: Moment | undefined) => {
         //value.format is used here to output a datetime with offset to utc attached
         //value.toJson would normalize the output to utc,
         // which would make it impossible to reconstruct the original timezone
