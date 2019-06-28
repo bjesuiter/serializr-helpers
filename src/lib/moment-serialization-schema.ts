@@ -5,7 +5,7 @@
  */
 import {custom, PropSchema, SKIP} from 'serializr';
 import moment, {Moment} from 'moment';
-import {JsonType} from "./json-type";
+import {MomentSerializationDefaults, MomentSerializationOptions} from "./moment-serialization-options";
 
 function buildSerializer(valueIfUndefined?: any, useUtc = false, serializationFormat: string = 'ISO') {
     return (value: Moment | undefined) => {
@@ -39,74 +39,18 @@ function buildDeserializer(useUtc?: boolean) {
 }
 
 /**
- * This is the default serialization schema.
- * It skips undefined moment objects and uses local time deserialization with `moment()` instead of moment.utc();
+ * This factory function returns a serialization schema for Moment objects.
+ *
+ * @default The default schema skips undefined moment objects in serialization and
+ *          keeps timezone offset while serialization and deserialization.
+ *          This differs from default moment.toIsoString() behavior, which converts local timestamps (with like +02:00 offset)
+ *          to UTC in serialization (Strings with Z as offset)
+ * @param options
+ * @constructor
  */
-export const MomentIsoSerialization: PropSchema = custom(buildSerializer(), buildDeserializer());
-
-export function MomentSerializationSchema(customize?: boolean) {
-    if (!customize) {
-        return MomentIsoSerialization;
-    }
-
-    return new MomentSerializationSchema.Builder();
-}
-
-export namespace MomentSerializationSchema {
-
-    export class Builder {
-
-        public valueIfUndefined?: JsonType;
-        public useUtcFlag: boolean = false;
-        public serializationFormat: string | 'ISO' = 'ISO';
-
-        constructor() {
-
-        }
-
-        /**
-         * This value will be returned, if the moment value is undefined, which should have been serialized,
-         * It must be a JSON compatible value.
-         * This means, it must be of one type of: string | boolean | number | object | [].
-         * If this is not set, this moment value will be skipped in serialization.
-         *
-         * Applies only to serialization.
-         * @param value
-         */
-        public useValueIfUndefined(value: JsonType) {
-            this.valueIfUndefined = value;
-            return this;
-        }
-
-        /**
-         * Uses moment.utc() instead of moment(), which parses the variable as utc
-         * and does not convert the time into local time of the running node instance.
-         *
-         * Applies to serialization & deserialization
-         */
-        public useUtc () {
-            this.useUtcFlag = true;
-            return this;
-        }
-
-        /**
-         *
-         * @param string format which is used to serialize moment objects into
-         * @default complete RFC-3339 format, which is equal to ISO-8601, for example: 2009-01-01T12:00:00+01:00
-         *          would be written as YYYY-MM-DDTHH:mm:ss.SSSZZ. In contrast to moment js default,
-         *          this default keeps the offset in serialization. This breaks the compatibility with javascript Date,
-         *          but if it's not needed, this is the more complete option.
-         */
-        public useSerializationFormat(format: string) {
-            this.serializationFormat = format;
-        }
-
-        public build() : PropSchema {
-           return custom(
-                buildSerializer(this.valueIfUndefined, this.useUtcFlag, this.serializationFormat),
-                buildDeserializer(this.useUtcFlag)
-            )
-        }
-
-    }
+export function MomentSerializationSchema(options: MomentSerializationOptions = MomentSerializationDefaults): PropSchema {
+    return custom(
+        buildSerializer(options.valueIfUndefined, options.useUtc, options.serializationFormat),
+        buildDeserializer(options.useUtc)
+    );
 }
