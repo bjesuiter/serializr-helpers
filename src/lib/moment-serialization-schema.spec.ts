@@ -21,11 +21,9 @@ describe('MomentSerializationScheme', function () {
         });
 
         it('deserialize', () => {
-            const js = JSON.parse(`
-            {
+            const js = JSON.parse(`{
                 "testMoment": "${testMomentString}"
-            }
-            `);
+            }`);
 
             expect(js).toEqual(serialize(testIsoModel));
         })
