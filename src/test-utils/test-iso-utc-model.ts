@@ -4,10 +4,7 @@ import {MomentSerializationSchema} from "../lib/moment-serialization-schema";
 
 export class TestIsoUtcModel {
 
-    @serializable(new MomentSerializationSchema.Builder()
-        .useUtc()
-        .build()
-    )
+    @serializable(MomentSerializationSchema({useUtc: true}))
     public testMoment: Moment;
 
     constructor(testMoment: Moment) {
