@@ -10,7 +10,8 @@
 ## Next 
 
 - Feature: Serialization Helpers for JSON and POJOS
-- Feature: MomentIsoSerialization PropSchema
+- Feature: MomentIsoSerialization as default
+- Feature: MomentSerializationSchema Factory Function
 
 ### [0.0.1] - 2019-04-29
 Initial Version
