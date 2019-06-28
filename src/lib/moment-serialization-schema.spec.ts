@@ -10,23 +10,36 @@ describe('MomentSerializationScheme', function () {
     const testIsoUtcString = '2019-06-10T06:50:23.559Z';
 
     describe('MomentIsoSerialization', () => {
-        describe('with localtime', () => {
-            it('serialize', () => {
+        describe('with TestIsoModel', () => {
+            it('serialize local -> local time', () => {
                 const testIsoModel = new TestIsoModel(moment(testIsoLocalString));
                 const js = serialize(testIsoModel);
                 expect(js.testMoment).toEqual(testIsoLocalString);
             });
+            it('serialize utc -> local time', () => {
+                const testIsoModel = new TestIsoModel(moment(testIsoUtcString));
+                const js = serialize(testIsoModel);
+                expect(js.testMoment).toEqual(testIsoLocalString);
+            });
 
-            it('deserialize', () => {
-                const testIsoModel = new TestIsoModel(moment(testIsoLocalString));
-                const js = JSON.parse(`{
+            it('deserialize local -> local time', () => {
+                const isoLocalMoment = moment(testIsoLocalString);
+                const recovered = deserializeFromJson(TestIsoModel, `{
                     "testMoment": "${testIsoLocalString}"
                  }`);
-                expect(js).toEqual(serialize(testIsoModel));
+                expect(recovered.testMoment.isSame(isoLocalMoment)).toBe(true);
+            });
+
+            it('deserialize utc -> local time', () => {
+                const isoLocalMoment = moment(testIsoLocalString);
+                const recovered = deserializeFromJson(TestIsoModel, `{
+                    "testMoment": "${testIsoUtcString}"
+                 }`);
+                expect(recovered.testMoment.isSame(isoLocalMoment)).toBe(true);
             });
         });
 
-        describe('with utc time', () => {
+        describe('with TestIsoUtcModel', () => {
             it('serialize utc -> utc time', () => {
                 const testIsoUtcModel = new TestIsoUtcModel(moment(testIsoUtcString));
                 const js = serialize(testIsoUtcModel);
@@ -41,18 +54,18 @@ describe('MomentSerializationScheme', function () {
 
             it('deserialize utc -> utc time', () => {
                 const isoUtcMoment = moment(testIsoUtcString);
-                const recoveredModel = deserializeFromJson(TestIsoUtcModel, `{
+                const recovered = deserializeFromJson(TestIsoUtcModel, `{
                     "testMoment": "${testIsoUtcString}"
                  }`);
-                expect(recoveredModel.testMoment.isSame(isoUtcMoment)).toBe(true);
+                expect(recovered.testMoment.isSame(isoUtcMoment)).toBe(true);
             });
 
             it('deserialize local -> utc time', () => {
                 const isoUtcMoment = moment(testIsoUtcString);
-                const recoveredModel = deserializeFromJson(TestIsoUtcModel, `{
+                const recovered = deserializeFromJson(TestIsoUtcModel, `{
                     "testMoment": "${testIsoLocalString}"
                  }`);
-                expect(recoveredModel.testMoment.isSame(isoUtcMoment)).toBe(true);
+                expect(recovered.testMoment.isSame(isoUtcMoment)).toBe(true);
             });
         });
 
