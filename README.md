@@ -31,3 +31,5 @@ With options:
 - add typescript 
 - add jest testing
 - add tests which serialize demo objects  
+- fix wallaby test running (problems with modern import syntax => 
+current workaround: npm run test:watch)
