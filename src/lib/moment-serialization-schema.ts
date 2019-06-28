@@ -5,7 +5,6 @@
  */
 import {custom, PropSchema, SKIP} from 'serializr';
 import moment, {Moment} from 'moment';
-import {MomentSerializationOptions} from "./moment-serialization-options";
 import {JsonType} from "./json-type";
 
 function buildSerializer(valueIfUndefined?: any, useUtc = false, serializationFormat: string = 'ISO') {
