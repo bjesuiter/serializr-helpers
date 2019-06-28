@@ -1,24 +1,20 @@
-module.exports = function (wallaby) {
+module.exports = function () {
     return {
         files: [
-            'src/**/*.ts'
+            'tsconifg.json',
+            'src/**/*.ts',
+            '!src/**/*spec.ts'
         ],
 
         tests: [
-            'tests/**/*spec.ts'
+            'src/**/*spec.ts'
         ],
-
-        compilers: {
-            '**/*.ts?(x)': wallaby.compilers.typeScript({
-                isolatedModules: true
-            })
-        },
-
-        testFramework: 'jest',
 
         env: {
             type: 'node',
             runner: 'node'  // or full path to any node executable
-        }
+        },
+
+        testFramework: 'jest',
     };
 };
