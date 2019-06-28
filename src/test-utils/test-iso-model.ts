@@ -1,10 +1,10 @@
 import {serializable} from "serializr";
 import {Moment} from "moment";
-import {MomentIsoSerialization} from "../lib/moment-serialization-schema";
+import {MomentSerializationSchema} from "../lib/moment-serialization-schema";
 
 export class TestIsoModel {
 
-    @serializable(MomentIsoSerialization)
+    @serializable(MomentSerializationSchema())
     public testMoment: Moment;
 
     constructor(testMoment: Moment) {
