@@ -4,10 +4,12 @@ export class MomentSerializationOptions {
 
     public readonly valueIfUndefined: any;
     public readonly useUtc: any;
+    public readonly serializationFormat: string | 'ISO';
 
     constructor(builder: MomentSerializationOptions.Builder) {
         this.valueIfUndefined = builder.valueIfUndefined;
         this.useUtc = builder.useUtcFlag;
+        this.serializationFormat = builder.momentSerializationFormat;
     }
 }
 
@@ -17,7 +19,7 @@ export namespace MomentSerializationOptions {
 
         public valueIfUndefined?: JsonType;
         public useUtcFlag?: boolean;
-        public momentSerializationFormat: string;
+        public momentSerializationFormat: string | 'ISO';
 
         constructor() {
             this.momentSerializationFormat = 'ISO';
