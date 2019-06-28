@@ -3,15 +3,29 @@ Provides some helper functions and serialization PropertySchemas for mobxjs/seri
 
 ## Content 
 
-### Class `MomentIsoSerialization` Usage
-Can be used as a serializr PropSchema to serialize Moment Objects. 
+### Class `` Usage
+Can be used as a factory for serializr PropSchema to serialize Moment Objects. 
 
     /**
      * A Timestamp as Moment.js object
      */
-    @serializable(MomentSerializationSchema)
+    @serializable(new MomentSerializationSchema())
     timestamp: Moment;
-    
+
+With options: 
+
+    /**
+     * A Timestamp as Moment.js object
+     */
+    @serializable(
+    new MomentSerializationSchema.Builder()
+      .useValueIfUndefined('no-date')
+      .useUtc()
+      .useSerializationFormat('YYYY-MM-DD')
+      .build()
+    )
+    timestamp: Moment;
+
 ## TODOs 
 
 - add typescript 
