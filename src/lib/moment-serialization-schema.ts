@@ -44,6 +44,14 @@ function buildDeserializer(useUtc?: boolean) {
  */
 export const MomentIsoSerialization: PropSchema = custom(buildSerializer(), buildDeserializer());
 
+export function MomentSerializationSchema(customize?: boolean) {
+    if (!customize) {
+        return MomentIsoSerialization;
+    }
+
+    return new MomentSerializationSchema.Builder();
+}
+
 export namespace MomentSerializationSchema {
 
     export class Builder {
