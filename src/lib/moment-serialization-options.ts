@@ -17,9 +17,10 @@ export namespace MomentSerializationOptions {
 
         public valueIfUndefined?: JsonType;
         public useUtcFlag?: boolean;
+        public momentSerializationFormat: string;
 
         constructor() {
-
+            this.momentSerializationFormat = 'ISO';
         }
 
         /**
@@ -40,14 +41,33 @@ export namespace MomentSerializationOptions {
          * Uses moment.utc() instead of moment(), which parses the variable as utc
          * and does not convert the time into local time of the running node instance.
          *
-         * Applies only to deserialization
+         * Applies to serialization & deserialization
          */
         public useUtc () {
             this.useUtcFlag = true;
             return this;
         }
 
-        public build() {
+        /**
+         *
+         * @param string format which is used to serialize moment objects into
+         * @default complete RFC-3339 format, which is equal to ISO-8601, for example: 2009-01-01T12:00:00+01:00
+         *          would be written as YYYY-MM-DDTHH:mm:ss.SSSZZ. In contrast to moment js default,
+         *          this default keeps the offset in serialization. This breaks the compatibility with javascript Date,
+         *          but if it's not needed, this is the more complete option.
+         */
+        public useMomentSerializationFormat(format: string) {
+            this.momentSerializationFormat = format;
+        }
+
+        /**
+         * Build the MomentSerializationOptions objects
+         */
+        public build(): MomentSerializationOptions {
+            if (this.momentSerializationFormat == undefined) {
+                this.momentSerializationFormat = 'ISO'
+            }
+
             return new MomentSerializationOptions(this);
         }
     }
