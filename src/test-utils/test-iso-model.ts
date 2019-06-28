@@ -10,6 +10,4 @@ export class TestIsoModel {
     constructor(testMoment: Moment) {
         this.testMoment = testMoment;
     }
-
-
 }
