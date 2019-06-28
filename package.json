@@ -8,7 +8,7 @@
     "lint": "wotan -p tsconfig.json",
     "lint:fix": "wotan -p tsconfig.json --fix",
     "test": "jest",
-    "test:cov": "jest --coverage",
+    "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
     "prepublishOnly": "npm run build"
   },
