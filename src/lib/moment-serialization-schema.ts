@@ -6,9 +6,8 @@
 import {custom, PropSchema, SKIP} from 'serializr';
 import moment, {Moment} from 'moment';
 import {MomentSerializationOptions} from "./moment-serialization-options";
-import {JsonType} from "./json-type";
 
-function buildSerializer(defaultValue?: JsonType) {
+function buildSerializer(valueIfUndefined?: any, useUtc = false, serializationFormat: string = 'ISO') {
     return (value: Moment | undefined) => {
         //value.format is used here to output a datetime with attached offset to utc
         //value.toJson would normalize the output to utc,
@@ -17,10 +16,19 @@ function buildSerializer(defaultValue?: JsonType) {
         // intended use of == vs. === to include null when checking for undefined
         if (value == undefined) {
             // logger.debug('Moment object will be skipped in serialization - object is undefined');
-            return (defaultValue) ? defaultValue : SKIP;
+            return (valueIfUndefined) ? valueIfUndefined : SKIP;
         }
 
-        return value.toISOString();
+        if (serializationFormat === 'ISO') {
+            // see documentation for toISO String for keepOffset explanation:
+            // https://momentjs.com/docs/#/displaying/as-iso-string/
+            return (useUtc) ? value.toISOString(true) : value.toISOString();
+        }
+
+        value = (useUtc) ? value.utc() : value;
+
+        return value.format(serializationFormat);
+
     };
 }
 
@@ -29,16 +37,6 @@ function buildDeserializer(useUtc?: boolean) {
         return (useUtc) ? moment.utc(jsonValue): moment(jsonValue);
     }
 }
-
-
-/**
- * TODO: Add customization to this schema
- * Idea: Create a factory function, which generates a PropSchema for Moment
- * Can accept a MomentSerializationOption object which can have
- *      - what to do, when value is undefined?
- *      - how to format the string serialization
- *      - how to handle utc and local time
- */
 
 /**
  * This is the default serialization schema.
@@ -52,7 +50,7 @@ export function MomentSerializationSchema(options?: MomentSerializationOptions):
     }
 
     return custom(
-        buildSerializer(options.valueIfUndefined),
+        buildSerializer(options.valueIfUndefined, options.useUtc, options.serializationFormat),
         buildDeserializer(options.useUtc)
     );
 }
