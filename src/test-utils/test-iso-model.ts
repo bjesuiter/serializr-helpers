@@ -2,7 +2,7 @@ import {serializable} from "serializr";
 import {Moment} from "moment";
 import {MomentIsoSerialization} from "../lib/moment-serialization-schema";
 
-export class TestModel {
+export class TestIsoModel {
 
     @serializable(MomentIsoSerialization)
     public testMoment: Moment;

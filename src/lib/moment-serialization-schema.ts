@@ -22,7 +22,7 @@ function buildSerializer(valueIfUndefined?: any, useUtc = false, serializationFo
         if (serializationFormat === 'ISO') {
             // see documentation for toISO String for keepOffset explanation:
             // https://momentjs.com/docs/#/displaying/as-iso-string/
-            return (useUtc) ? value.toISOString(true) : value.toISOString();
+            return (useUtc) ? value.toISOString() : value.toISOString(true);
         }
 
         value = (useUtc) ? value.utc() : value;
@@ -43,13 +43,6 @@ function buildDeserializer(useUtc?: boolean) {
  * It skips undefined moment objects and uses local time deserialization with `moment()` instead of moment.utc();
  */
 export const MomentIsoSerialization: PropSchema = custom(buildSerializer(), buildDeserializer());
-
-export class MomentSerializationSchema {
-
-    constructor() {
-        return MomentIsoSerialization;
-    }
-}
 
 export namespace MomentSerializationSchema {
 
