@@ -1,6 +1,6 @@
 import {serializable} from "serializr";
-import {MomentIsoSerialization} from "../src/lib/moment-serialization-schema";
 import {Moment} from "moment";
+import {MomentIsoSerialization} from "../lib/moment-serialization-schema";
 
 export class TestModel {
 
