@@ -15,8 +15,15 @@ function buildSerializer(valueIfUndefined?: any, useUtc = false, serializationFo
 
         // intended use of == vs. === to include null when checking for undefined
         if (value == undefined) {
-            // logger.debug('Moment object will be skipped in serialization - object is undefined');
-            return (valueIfUndefined) ? valueIfUndefined : SKIP;
+
+            if (!moment.isMoment(valueIfUndefined)) {
+                // Moment object will be skipped in serialization if no default value is set
+                // or json-compatible default value will be returned
+                return (valueIfUndefined) ? valueIfUndefined : SKIP;
+            } else {
+                // default value is a moment object => serialize as normal moment object
+                value = valueIfUndefined;
+            }
         }
 
         if (serializationFormat === 'ISO') {
