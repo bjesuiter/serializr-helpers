@@ -4,6 +4,7 @@ import {serialize} from "serializr";
 import {TestIsoUtcModel} from "../test-utils/test-iso-utc-model";
 import {deserializeFromJson} from "./serializr-helpers";
 import {TestUndefinedMomentModel} from "../test-utils/test-undefined-moment-model";
+import {TestUndefinedMomentWithDefaultString} from "../test-utils/test-undefined-moment-with-default-string";
 
 describe('MomentSerializationScheme', function () {
 
@@ -75,10 +76,18 @@ describe('MomentSerializationScheme', function () {
     describe('Test serialization of undefined moment', () => {
 
         it('should skip undefined moment in serialization', () => {
-            const testIsoModel = new TestUndefinedMomentModel();
-            const js = serialize(testIsoModel);
+            const testModel = new TestUndefinedMomentModel();
+            const js = serialize(testModel);
             expect(js).toEqual({});
         });
+
+        it('should serialize default value string: "null"', () => {
+            const testModel = new TestUndefinedMomentWithDefaultString();
+            const js = serialize(testModel);
+            expect(js).toEqual({testMoment: 'null'});
+        });
+
+
 
     });
 
