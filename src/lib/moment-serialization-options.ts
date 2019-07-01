@@ -45,7 +45,7 @@ export interface MomentSerializationOptions {
      * Note that setting a deserializationDefault sets the policy to silent,
      * because the default value will be used instead of undefined / illegal.
      */
-    deserializationErrorPolicy: DeserializationErrorPolicy;
+    deserializationErrorPolicy?: DeserializationErrorPolicy;
 
     /**
      * The default moment object to be used when deserialized values are illegal.
