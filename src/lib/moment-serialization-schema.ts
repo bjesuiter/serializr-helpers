@@ -7,7 +7,7 @@ import {custom, PropSchema, SKIP} from 'serializr';
 import moment, {Moment} from 'moment';
 import {MomentSerializationDefaults, MomentSerializationOptions} from "./moment-serialization-options";
 
-function buildSerializer(valueIfUndefined?: any, useUtc = false, serializationFormat: string = 'ISO') {
+export function buildSerializer(valueIfUndefined?: any, useUtc = false, serializationFormat: string = 'ISO') {
     return (value: Moment | undefined) => {
         //value.format is used here to output a datetime with attached offset to utc
         //value.toJson would normalize the output to utc,
@@ -39,7 +39,7 @@ function buildSerializer(valueIfUndefined?: any, useUtc = false, serializationFo
     };
 }
 
-function buildDeserializer(useUtc?: boolean) {
+export function buildDeserializer(useUtc?: boolean) {
     return (jsonValue: string) => {
         return (useUtc) ? moment.utc(jsonValue): moment(jsonValue);
     }
