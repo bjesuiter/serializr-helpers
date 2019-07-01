@@ -3,9 +3,14 @@
  * to make moment.js Moment objects serializable
  * @type {PropSchema}
  */
-import {custom, PropSchema, SKIP} from 'serializr';
+import {Context, custom, PropSchema, SKIP} from 'serializr';
 import moment, {Moment} from 'moment';
-import {MomentSerializationDefaults, MomentSerializationOptions} from "./moment-serialization-options";
+import {
+    DeserializationErrorPolicy,
+    MomentSerializationDefaults,
+    MomentSerializationOptions
+} from "./moment-serialization-options";
+import {log} from "./logger";
 
 export function buildSerializer(valueIfUndefined?: any, useUtc = false, serializationFormat: string = 'ISO') {
     return (value: Moment | undefined) => {
@@ -39,9 +44,51 @@ export function buildSerializer(valueIfUndefined?: any, useUtc = false, serializ
     };
 }
 
-export function buildDeserializer(useUtc?: boolean) {
-    return (jsonValue: string) => {
-        return (useUtc) ? moment.utc(jsonValue): moment(jsonValue);
+export function validateDefaultDeserializeValue(defaultRestoreValue: Moment) {
+    if (!defaultRestoreValue.isValid()) {
+        throw new Error(`Default Moment deserialization value is invalid. ` +
+            `Got ${JSON.stringify(defaultRestoreValue.creationData())}`);
+    }
+
+    return true;
+}
+
+export function buildDeserializer(
+    handleErrorPolicy: DeserializationErrorPolicy,
+    useUtc?: boolean,
+    defaultRestoreValue?: Moment
+) {
+    return (jsonValue: string, callback: (err: any, targetPropertyValue: any) => void, context?: Context) => {
+        let restoredMoment = (useUtc) ? moment.utc(jsonValue) : moment(jsonValue);
+
+
+        if (!restoredMoment.isValid()) {
+
+            if (defaultRestoreValue !== undefined && validateDefaultDeserializeValue(defaultRestoreValue)) {
+                // set the error Policy to silent when default value for decode was set explicitly.
+                handleErrorPolicy = 'silent';
+                restoredMoment = defaultRestoreValue;
+            }
+
+            const errorText = `Moment js serialized json value is invalid! 
+                    Got ${jsonValue} which does not decode into a valid Moment object.
+                    You can change the handling of this message by setting the 'deserializationErrorPolicy' in 
+                    MomentSerializationOptions`;
+            switch (handleErrorPolicy) {
+                case "throw":
+                    throw new Error(errorText);
+                case "log-error":
+                    log.error(errorText);
+                    break;
+                case "log-warn":
+                    log.warn(errorText);
+                    break;
+                case "silent":
+                    break;
+            }
+        }
+
+        return restoredMoment;
     }
 }
 
@@ -58,6 +105,6 @@ export function buildDeserializer(useUtc?: boolean) {
 export function MomentSerializationSchema(options: MomentSerializationOptions = MomentSerializationDefaults): PropSchema {
     return custom(
         buildSerializer(options.valueIfUndefined, options.useUtc, options.serializationFormat),
-        buildDeserializer(options.useUtc)
+        buildDeserializer(options.deserializationErrorPolicy, options.useUtc, options.deserializationDefault)
     );
 }
