@@ -2,7 +2,8 @@
 /**
  * Serializr Property Schemas / Property Schema Factories
  */
-export * from "./lib/moment-iso-serialization"
+export * from "./lib/moment-serialization-schema"
+export * from "./lib/moment-serialization-options"
 
 /**
  * Tools / Helpers
