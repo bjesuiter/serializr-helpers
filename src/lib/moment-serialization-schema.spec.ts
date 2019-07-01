@@ -3,7 +3,7 @@ import {TestIsoModel} from "../test-utils/test-iso-model";
 import {serialize, SKIP} from "serializr";
 import {TestIsoUtcModel} from "../test-utils/test-iso-utc-model";
 import {deserializeFromJson} from "./serializr-helpers";
-import {buildSerializer} from "./moment-serialization-schema";
+import {buildDeserializer, buildSerializer} from "./moment-serialization-schema";
 
 describe('MomentSerializationScheme', function () {
 
@@ -95,7 +95,64 @@ describe('MomentSerializationScheme', function () {
             expect(result).toEqual(unixStartTimeString);
         });
 
+    });
 
+    describe('Test buildDeserializer function', () => {
+
+        describe('Test deserializationErrorPolicies', () => {
+
+            it('should throw error', () => {
+                const deserializeFunc = buildDeserializer('throw');
+                expect(() => deserializeFunc('some-illegal-moment', () => {
+                }))
+                    .toThrowErrorMatchingSnapshot();
+            });
+
+            it('should log error', () => {
+                const mockLogger = {
+                    error: jest.fn(),
+                    info: jest.fn(),
+                    debug: jest.fn(),
+                    log: jest.fn(),
+                    warn: jest.fn(),
+                };
+                const deserializeFunc = buildDeserializer('log-error', false, undefined, mockLogger);
+                deserializeFunc('some-illegal-moment', () => {
+                });
+
+                expect(mockLogger.error).toHaveBeenCalledTimes(1);
+            });
+
+            it('should log warning', () => {
+                const mockLogger = {
+                    error: jest.fn(),
+                    info: jest.fn(),
+                    debug: jest.fn(),
+                    log: jest.fn(),
+                    warn: jest.fn(),
+                };
+                const deserializeFunc = buildDeserializer('log-warn', false, undefined, mockLogger);
+                deserializeFunc('some-illegal-moment', () => {
+                });
+
+                expect(mockLogger.warn).toHaveBeenCalledTimes(1);
+            });
+        });
+
+        describe('Test defaultDeserializationValue', () => {
+
+            it('should deserialize to default value', () => {
+                const defaultMoment = moment("1990-01-01T00:00:00.000Z");
+                const deserializeFunc = buildDeserializer(
+                    'silent',
+                    true,
+                    defaultMoment);
+                const result = deserializeFunc('some-illegal-moment', () => {
+                });
+                expect(result.isValid()).toBe(true);
+                expect(result.isSame(defaultMoment)).toBe(true);
+            });
+        });
 
     });
 

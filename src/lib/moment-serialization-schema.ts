@@ -56,11 +56,18 @@ export function validateDefaultDeserializeValue(defaultRestoreValue: Moment) {
 export function buildDeserializer(
     handleErrorPolicy: DeserializationErrorPolicy = 'log-error',
     useUtc: boolean = false,
-    defaultRestoreValue?: Moment
+    defaultRestoreValue?: Moment,
+    logger?: Minilog
 ) {
     return (jsonValue: string, callback: (err: any, targetPropertyValue: any) => void, context?: Context) => {
+        // const isoFormat = 'YYYY-MM-DDTHH:mm:ss.sssZZ';
+        // const isoUtcFormat = 'YYYY-MM-DDTHH:mm:ss.sssZ';
+        //Note: passing the iso format avoids deprecation notices about format detection
         let restoredMoment = (useUtc) ? moment.utc(jsonValue) : moment(jsonValue);
 
+        if (logger === undefined) {
+            logger = log;
+        }
 
         if (!restoredMoment.isValid()) {
 
@@ -78,10 +85,10 @@ export function buildDeserializer(
                 case "throw":
                     throw new Error(errorText);
                 case "log-error":
-                    log.error(errorText);
+                    logger.error(errorText);
                     break;
                 case "log-warn":
-                    log.warn(errorText);
+                    logger.warn(errorText);
                     break;
                 case "silent":
                     break;
