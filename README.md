@@ -33,3 +33,7 @@ With options:
 - add tests which serialize demo objects  
 - fix wallaby test running (problems with modern import syntax => 
 current workaround: npm run test:watch)
+
+## Uses 
+
+[mixu/minilog](https://github.com/mixu/minilog): A lighweight client & server logging lib with StreamApi backends
