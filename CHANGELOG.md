@@ -7,7 +7,11 @@
 
 ## Versions
 
-## Next 
+## [1.0.1] - 2019-07-01
+- Bugfix: add the Minilog logger types to dependencies instead of devDependencies  
+=> otherwise the type can not be found in apps using this library.
+
+## [1.0.0] - 2019-07-01
 
 - Feature: Serialization Helpers for JSON and POJOS
 - Feature: MomentIsoSerialization as default
