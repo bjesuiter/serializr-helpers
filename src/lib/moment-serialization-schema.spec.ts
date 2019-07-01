@@ -152,6 +152,13 @@ describe('MomentSerializationScheme', function () {
                 expect(result.isValid()).toBe(true);
                 expect(result.isSame(defaultMoment)).toBe(true);
             });
+
+            it('should throw error when default deserialization value is invalid', () => {
+                const deserializeFunc = buildDeserializer('silent', false, moment('default-illegal-moment'));
+                expect(() => deserializeFunc('some-illegal-moment', () => {
+                }))
+                    .toThrowErrorMatchingSnapshot();
+            });
         });
 
     });

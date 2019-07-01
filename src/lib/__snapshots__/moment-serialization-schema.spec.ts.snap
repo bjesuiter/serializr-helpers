@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`MomentSerializationScheme Test buildDeserializer function Test defaultDeserializationValue should throw error when default deserialization value is invalid 1`] = `"Default Moment deserialization value is invalid. Got input string \\"default-illegal-moment\\""`;
+
 exports[`MomentSerializationScheme Test buildDeserializer function Test deserializationErrorPolicies should throw error 1`] = `
 "Moment js serialized json value is invalid! 
                     Got the value \\"some-illegal-moment\\" which does not decode into a valid Moment object.

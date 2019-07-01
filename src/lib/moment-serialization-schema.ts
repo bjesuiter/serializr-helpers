@@ -47,7 +47,7 @@ export function buildSerializer(valueIfUndefined?: any, useUtc = false, serializ
 export function validateDefaultDeserializeValue(defaultRestoreValue: Moment) {
     if (!defaultRestoreValue.isValid()) {
         throw new Error(`Default Moment deserialization value is invalid. ` +
-            `Got ${JSON.stringify(defaultRestoreValue.creationData())}`);
+            `Got input string "${defaultRestoreValue.creationData().input}"`);
     }
 
     return true;
