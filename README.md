@@ -36,4 +36,5 @@ current workaround: npm run test:watch)
 
 ## Uses 
 
-[mixu/minilog](https://github.com/mixu/minilog): A lighweight client & server logging lib with StreamApi backends
+[mixu/minilog](https://github.com/mixu/minilog): A lighweight client & server logging lib with StreamApi backends  
+Docs URL: http://mixu.net/minilog/
