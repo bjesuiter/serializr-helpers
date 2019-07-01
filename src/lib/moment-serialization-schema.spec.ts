@@ -3,6 +3,7 @@ import {TestIsoModel} from "../test-utils/test-iso-model";
 import {serialize} from "serializr";
 import {TestIsoUtcModel} from "../test-utils/test-iso-utc-model";
 import {deserializeFromJson} from "./serializr-helpers";
+import {TestUndefinedMomentModel} from "../test-utils/test-undefined-moment-model";
 
 describe('MomentSerializationScheme', function () {
 
@@ -67,6 +68,16 @@ describe('MomentSerializationScheme', function () {
                  }`);
                 expect(recovered.testMoment.isSame(isoUtcMoment)).toBe(true);
             });
+        });
+
+    });
+
+    describe('Test serialization of undefined moment', () => {
+
+        it('should skip undefined moment in serialization', () => {
+            const testIsoModel = new TestUndefinedMomentModel();
+            const js = serialize(testIsoModel);
+            expect(js).toEqual({});
         });
 
     });
