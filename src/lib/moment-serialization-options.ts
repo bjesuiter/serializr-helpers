@@ -1,6 +1,8 @@
 import {Moment} from "moment";
 import {JsonValue} from "./json-types";
 
+export type DeserializationErrorPolicy = 'throw' | 'log-error' | 'log-warn' | 'silent';
+
 export interface MomentSerializationOptions {
 
     /**
@@ -40,7 +42,7 @@ export interface MomentSerializationOptions {
      * log-warn - log a warning to the console
      * silent - log nothing
      */
-    handleIllegalValuesInDeserialization: 'throw' | 'log-error' | 'log-warn' | 'silent';
+    deserializationErrorPolicy: DeserializationErrorPolicy;
 
     /**
      * The default moment object to be used when deserialized values are illegal.
@@ -51,5 +53,5 @@ export interface MomentSerializationOptions {
 export const MomentSerializationDefaults: MomentSerializationOptions = {
     useUtc: false,
     serializationFormat: 'ISO',
-    handleIllegalValuesInDeserialization: 'log-error'
+    deserializationErrorPolicy: 'log-error'
 };
