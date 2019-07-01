@@ -95,6 +95,29 @@ describe('MomentSerializationScheme', function () {
             expect(result).toEqual(unixStartTimeString);
         });
 
+        it('should serialize in utc instead of local time', () => {
+            const unixStartTimeInGermany = "1990-01-01T02:00:00.000+02:00";
+            const unixStartTime = "1990-01-01T00:00:00.000Z";
+            const serializeFunction = buildSerializer(undefined, true);
+
+            const result = serializeFunction(moment(unixStartTimeInGermany));
+            expect(result).toEqual(unixStartTime);
+        });
+
+        it('should serialize in custom format', () => {
+            const unixStartTime = "1990-01-01T00:00:00.000Z";
+            const serializeFunction = buildSerializer(undefined, true, 'YYYY-MM-DD');
+            const result = serializeFunction(moment(unixStartTime));
+            expect(result).toEqual('1990-01-01');
+        });
+
+        it('should serialize in localtime with custom format', () => {
+            const unixStartTime = "1990-01-01T00:00:00.000Z";
+            const serializeFunction = buildSerializer(undefined, false, 'YYYY-MM-DD');
+            const result = serializeFunction(moment(unixStartTime));
+            expect(result).toEqual('1990-01-01');
+        })
+
     });
 
     describe('Test buildDeserializer function', () => {
