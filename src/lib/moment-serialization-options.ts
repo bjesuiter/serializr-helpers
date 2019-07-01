@@ -1,4 +1,5 @@
-import {JsonType} from "./json-type";
+import {Moment} from "moment";
+import {JsonValue} from "./json-types";
 
 export interface MomentSerializationOptions {
 
@@ -10,7 +11,7 @@ export interface MomentSerializationOptions {
      *
      * Applies only to serialization.
      */
-    valueIfUndefined?: JsonType;
+    valueIfUndefined?: JsonValue | Moment;
 
     /**
      * Uses moment.utc() instead of moment(), which parses the variable as utc
