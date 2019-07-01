@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Serializr Helpers serialize JSON alias for serializeToJson 1`] = `"{\\"demoMoment\\":\\"2019-06-10T08:50:23.559+02:00\\",\\"demoProp\\":\\"Bob der Baumeister\\",\\"demoArray\\":[\\"Lilly\\",\\"Gunnar\\",\\"Fjordojan\\"]}"`;
+
 exports[`Serializr Helpers serialize to JSON 1`] = `"{\\"demoMoment\\":\\"2019-06-10T08:50:23.559+02:00\\",\\"demoProp\\":\\"Bob der Baumeister\\",\\"demoArray\\":[\\"Lilly\\",\\"Gunnar\\",\\"Fjordojan\\"]}"`;
