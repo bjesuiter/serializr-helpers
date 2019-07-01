@@ -41,13 +41,16 @@ export interface MomentSerializationOptions {
      * log-error - log an error to the console
      * log-warn - log a warning to the console
      * silent - log nothing
+     *
+     * Note that setting a deserializationDefault sets the policy to silent,
+     * because the default value will be used instead of undefined / illegal.
      */
     deserializationErrorPolicy: DeserializationErrorPolicy;
 
     /**
      * The default moment object to be used when deserialized values are illegal.
      */
-    restoreDefault?: Moment;
+    deserializationDefault?: Moment;
 }
 
 export const MomentSerializationDefaults: MomentSerializationOptions = {
