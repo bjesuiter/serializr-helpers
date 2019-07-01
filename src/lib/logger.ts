@@ -2,4 +2,4 @@ import Minilog from 'minilog'
 
 Minilog.enable();
 
-export const log = Minilog('@bjesuiter/serializr-helpers');
+export const log: Minilog = Minilog('@bjesuiter/serializr-helpers');
