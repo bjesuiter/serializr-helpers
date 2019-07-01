@@ -10,7 +10,7 @@ export interface MomentSerializationOptions {
      * This means, it must be of one type of: string | boolean | number | object | [].
      * If this is not set, this moment value will be skipped in serialization.
      *
-     * Applies only to serialization.
+     * Applies to serialization only.
      */
     valueIfUndefined?: JsonValue | Moment;
 
@@ -32,9 +32,24 @@ export interface MomentSerializationOptions {
      *            but if it's not needed, this is the more complete option.
      */
     serializationFormat?: string | 'ISO';
+
+    /**
+     * These are the options on what to do when deserialization fails.
+     * throw - throw an error
+     * log-error - log an error to the console
+     * log-warn - log a warning to the console
+     * silent - log nothing
+     */
+    handleIllegalValuesInDeserialization: 'throw' | 'log-error' | 'log-warn' | 'silent';
+
+    /**
+     * The default moment object to be used when deserialized values are illegal.
+     */
+    restoreDefault?: Moment;
 }
 
 export const MomentSerializationDefaults: MomentSerializationOptions = {
     useUtc: false,
-    serializationFormat: 'ISO'
+    serializationFormat: 'ISO',
+    handleIllegalValuesInDeserialization: 'log-error'
 };
