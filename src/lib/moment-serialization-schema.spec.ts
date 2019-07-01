@@ -1,10 +1,9 @@
-import moment from "moment";
+import moment, {Moment} from "moment";
 import {TestIsoModel} from "../test-utils/test-iso-model";
-import {serialize} from "serializr";
+import {serialize, SKIP} from "serializr";
 import {TestIsoUtcModel} from "../test-utils/test-iso-utc-model";
 import {deserializeFromJson} from "./serializr-helpers";
-import {TestUndefinedMomentModel} from "../test-utils/test-undefined-moment-model";
-import {TestUndefinedMomentWithDefaultString} from "../test-utils/test-undefined-moment-with-default-string";
+import {buildSerializer} from "./moment-serialization-schema";
 
 describe('MomentSerializationScheme', function () {
 
@@ -73,18 +72,27 @@ describe('MomentSerializationScheme', function () {
 
     });
 
-    describe('Test serialization of undefined moment', () => {
+    describe('Test buildSerializer function', () => {
 
         it('should skip undefined moment in serialization', () => {
-            const testModel = new TestUndefinedMomentModel();
-            const js = serialize(testModel);
-            expect(js).toEqual({});
+            const serializeFunction = buildSerializer();
+            const result = serializeFunction(undefined);
+            expect(result).toEqual(SKIP);
         });
 
         it('should serialize default value string: "null"', () => {
-            const testModel = new TestUndefinedMomentWithDefaultString();
-            const js = serialize(testModel);
-            expect(js).toEqual({testMoment: 'null'});
+            const defaultString = 'null';
+            const serializeFunction = buildSerializer(defaultString);
+            const result = serializeFunction(undefined);
+            expect(result).toEqual(defaultString);
+        });
+
+        it('should serialize default value moment: moment("1990-01-01T00:00:00.000Z")', () => {
+            const unixStartTimeString = "1990-01-01T00:00:00.000Z";
+            const defaultMoment: Moment = moment(unixStartTimeString);
+            const serializeFunction = buildSerializer(defaultMoment, true);
+            const result = serializeFunction(undefined);
+            expect(result).toEqual(unixStartTimeString);
         });
 
 
