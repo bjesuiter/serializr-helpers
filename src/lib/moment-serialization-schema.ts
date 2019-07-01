@@ -71,7 +71,7 @@ export function buildDeserializer(
             }
 
             const errorText = `Moment js serialized json value is invalid! 
-                    Got ${jsonValue} which does not decode into a valid Moment object.
+                    Got the value "${jsonValue}" which does not decode into a valid Moment object.
                     You can change the handling of this message by setting the 'deserializationErrorPolicy' in 
                     MomentSerializationOptions`;
             switch (handleErrorPolicy) {
