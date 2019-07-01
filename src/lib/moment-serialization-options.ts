@@ -5,7 +5,8 @@ export interface MomentSerializationOptions {
 
     /**
      * This value will be returned, if the moment value is undefined, which should have been serialized,
-     * It must be a JSON compatible value.
+     * It's a default value.
+     * It must be a JSON compatible value or a Moment Object.
      * This means, it must be of one type of: string | boolean | number | object | [].
      * If this is not set, this moment value will be skipped in serialization.
      *
