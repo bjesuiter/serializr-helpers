@@ -8,5 +8,13 @@ module.exports = {
     },
     // testEnvironment: 'node' | 'jsdom' (default) |
     // can be overwritten by '@jest-environment jsdom' at a comment at the top of the file
-    testEnvironment: 'node'
+    testEnvironment: 'node',
+    coverageThreshold: {
+        "global": {
+            "branches": 90,
+            "functions": 90,
+            "lines": 100,
+            "statements": -10
+        }
+    }
 };
