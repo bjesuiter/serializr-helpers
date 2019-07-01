@@ -54,8 +54,8 @@ export function validateDefaultDeserializeValue(defaultRestoreValue: Moment) {
 }
 
 export function buildDeserializer(
-    handleErrorPolicy: DeserializationErrorPolicy,
-    useUtc?: boolean,
+    handleErrorPolicy: DeserializationErrorPolicy = 'log-error',
+    useUtc: boolean = false,
     defaultRestoreValue?: Moment
 ) {
     return (jsonValue: string, callback: (err: any, targetPropertyValue: any) => void, context?: Context) => {
