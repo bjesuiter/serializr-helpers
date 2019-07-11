@@ -12,7 +12,8 @@
     "test:watch": "jest --watch",
     "test:watch:coverage": "jest --watch --coverage",
     "prepublishOnly": "npm-run-all lint test:coverage build",
-    "deploy": "npm publish --access public"
+    "deploy:yes": "npm publish --access public",
+    "deploy": "npm publish --access public --dry-run"
   },
   "repository": {
     "type": "git",
