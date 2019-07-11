@@ -7,13 +7,19 @@
 
 ## Versions
 
+## [2.1.0] - 2019-07-11
+- restructuring of output modules: 
+    - split dist.browser into `dist.commonjs.es5` and `dist.esm.es5`
+
 ## [2.0.0] - 2019-07-11
 - change module format of `dist.browser` & `dist` from `es2015` to `commonjs`
   to avoid problems
   when using these helpers in code which is tested by jest.   
   
   **Problem:**  
-  Jest runs inside node and node support for es6/es2015 import syntax is still experimental
+  Jest runs inside node and node support for es6/es2015 import syntax is still experimental, 
+  so all es6 modules have to be transpiled for jest. This somehow does not work in stencilOne, 
+  which uses rollup.
 
 ## [1.0.1] - 2019-07-01
 - Bugfix: add the Minilog logger types to dependencies instead of devDependencies  
