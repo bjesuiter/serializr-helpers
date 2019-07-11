@@ -9,7 +9,7 @@
 
 ## [2.1.0] - 2019-07-11
 - restructuring of output modules: 
-    - split dist.browser into `dist.commonjs.es5` and `dist.esm.es5`
+    - split `dist.browser` into `dist.commonjs.es5` and `dist.esm.es5`
 
 ## [2.0.0] - 2019-07-11
 - change module format of `dist.browser` & `dist` from `es2015` to `commonjs`
