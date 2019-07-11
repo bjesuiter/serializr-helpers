@@ -6,6 +6,6 @@
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
-    "lib": ["2018", "dom", "es5"]
+    "lib": ["es2018", "dom", "es5"]
   }
 }
