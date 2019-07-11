@@ -4,8 +4,8 @@
     "baseUrl": ".",
     "outDir": "./dist.browser",
     "target": "es5",
-    "module": "es2015",
+    "module": "commonjs",
     "moduleResolution": "node",
-    "lib": ["es2016", "dom", "es5"]
+    "lib": ["2018", "dom", "es5"]
   }
 }
