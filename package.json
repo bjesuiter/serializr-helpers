@@ -26,7 +26,8 @@
     "README.md",
     "package.json",
     "dist",
-    "dist.browser"
+    "dist.commonjs.es5",
+    "dist.esm.es5"
   ],
   "keywords": [
     "serializr",
