@@ -4,11 +4,12 @@
   "description": "Provides some helper functions and serialization PropertySchemas for mobxjs/serializr - library",
   "main": "index.js",
   "scripts": {
-    "build": "npm-run-all build:esnext build:commonjs.es5 build:commonjs.es6 build:esm.es5",
+    "build": "npm-run-all build:esnext build:commonjs.es5 build:commonjs.es6 build:esm.es5 build:esm.es6",
     "build:esnext": "tsc -p tsconfig.json",
     "build:commonjs.es5": "tsc -p tsconfig.commonjs.es5.json",
     "build:commonjs.es6": "tsc -p tsconfig.commonjs.es6.json",
     "build:esm.es5": "tsc -p tsconfig.esm.es5.json",
+    "build:esm.es6": "tsc -p tsconfig.esm.es6.json",
     "lint": "wotan -p tsconfig.json",
     "lint:fix": "wotan -p tsconfig.json --fix",
     "test": "jest",
