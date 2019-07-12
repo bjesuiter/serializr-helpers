@@ -5,6 +5,7 @@
 
 dist
 dist.commonjs.es5
+dist.commonjs.es6
 dist.esm.es5
 
 coverage
