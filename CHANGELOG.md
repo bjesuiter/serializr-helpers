@@ -7,6 +7,10 @@
 
 ## Versions
 
+## [2.2.0-0] - 2019-07-12 
+
+- add dist.commonjs.es6 build
+
 ## [2.1.0] - 2019-07-11
 - restructuring of output modules: 
     - split `dist.browser` into `dist.commonjs.es5` and `dist.esm.es5`

@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
+    "strict": true,
     "declaration": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true
+    "moduleResolution": "node"
   },
   "include": [
     "./src/**/*"
