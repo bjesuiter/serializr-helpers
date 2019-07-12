@@ -10,6 +10,7 @@
 ## [2.2.0-0] - 2019-07-12 
 
 - add dist.commonjs.es6 build
+- add dist.esm.es6 build
 
 ## [2.1.0] - 2019-07-11
 - restructuring of output modules: 
