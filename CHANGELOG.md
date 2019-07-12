@@ -7,7 +7,7 @@
 
 ## Versions
 
-## [2.2.0] - 2019-07-12 
+## [2.2.1] - 2019-07-12 
 
 - add dist.commonjs.es6 build
 - add dist.esm.es6 build
