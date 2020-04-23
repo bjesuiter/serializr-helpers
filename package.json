@@ -61,6 +61,6 @@
     "@types/minilog": "^2.0.29",
     "minilog": "^3.1.0",
     "moment": "^2.24.0",
-    "serializr": "^1.5.1"
+    "serializr": "^1.5.4"
   }
 }
